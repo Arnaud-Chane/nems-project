@@ -1,36 +1,21 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
+import Home from "./Home";
+import DescribeMovie from "./DescribeMovie";
 
 const App = () => {
-  const [movies, setMovies] = useState([]);
-
-  const API_URL = "http://localhost:7000/api/movies";
-
-  useEffect(() => {
-    async function getAllMovies() {
-      try {
-        const { data } = await axios.get(API_URL);
-        setMovies(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getAllMovies();
-  }, []);
-
   return (
-    // <div className="App">
-    //   {movies.map((movie) => (
-    //     <Link to={`/movies/${movie.id}`} key={movie.id}>
-    //       <li>{movie.title}</li>
-    //     </Link>
-    //   ))}
-    // </div>
-    <div>
-      <Link to="movies/1">
-        Movies1
-      </Link>
+    <div className="App">
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies/:id" element={<DescribeMovie />} />
+      </Routes>
     </div>
   );
 };
