@@ -7,39 +7,42 @@ function Home() {
 
   // const API_URL = "http://localhost:7000/api/movies";
   const client = axios.create({
-    baseURL: "http://localhost:7000/api/movies"
+    baseURL: "http://localhost:7000/api/movies",
   });
 
-  // useEffect(() => {
-  //   async function getAllMovies() {
-  //     try {
-  //       const { data } = await axios.get('');
-  //       setMovies(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   getAllMovies();
-  // }, []);
+  const getAllMovies = async () => {
+    const response = await client.get("");
+    if (response.status === 200) {
+      setMovies(response.data);
+    }
+  };
 
   useEffect(() => {
-    client.get('')
-    .then((response) => {
-      setMovies(response.data)
-    })
+    getAllMovies();
   });
 
-  // const handleDelete = (id) => {
-  //   client.delete(
-  // }
+  const handleClick = (id) => {
+    const response = client.delete(`${id}`);
+    if (response.status === 200) {
+      setMovies(movies.filter((movie) => movie.id != id));
+    }
+  };
 
   return (
     <div>
       {movies.map((movie) => (
-        <Link to={`/movies/${movie.id}`} key={movie.id}>
-          <li>{movie.title}</li>
-          {/* <button onClick={()=> handleDelete(movie.id)}>X</button> */}
-        </Link>
+        <div className="movies-div" key={movie.id}>
+          <Link to={`/movies/${movie.id}`}>
+            <li>{movie.title}</li>
+          </Link>
+          <button
+            className="btn-delete"
+            type="button"
+            onClick={() => handleClick(movie.id)}
+          >
+            X
+          </button>
+        </div>
       ))}
     </div>
   );

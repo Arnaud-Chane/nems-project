@@ -133,3 +133,5 @@ export const deleteMovie = (req, res) => {
     res.status(500).send("Pb deleting movies");
   })
 }
+
+
