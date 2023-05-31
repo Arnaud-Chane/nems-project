@@ -29,11 +29,16 @@ function Home() {
     })
   });
 
+  // const handleDelete = (id) => {
+  //   client.delete(
+  // }
+
   return (
     <div>
       {movies.map((movie) => (
         <Link to={`/movies/${movie.id}`} key={movie.id}>
           <li>{movie.title}</li>
+          {/* <button onClick={()=> handleDelete(movie.id)}>X</button> */}
         </Link>
       ))}
     </div>

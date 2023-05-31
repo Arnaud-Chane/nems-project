@@ -6,19 +6,18 @@ const DescribeMovie = () =>  {
 
   const { id }  = useParams();
 
-  const API_URL = `http://localhost:7000/api/movies/${id}`;
+  const client = axios.create({
+    baseURL: `http://localhost:7000/api/movies/${id}`
+  })
 
   const [movieDetail, setDetail] = useState([]);
 
+  const getMovieById = async () => {
+    const response = await client.get('');
+    setDetail(response.data);
+  }
+
   useEffect(() => {
-    async function getMovieById() {
-      try {
-        const { data } = await axios.get(API_URL);
-        setDetail(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
     getMovieById();
   });
 
