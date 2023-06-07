@@ -28,8 +28,21 @@ function Home() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+  }
+
   return (
     <div>
+      <form action="submit" className="form-harsh-pwd" onSubmit={() => handleSubmit()} >
+        <input type="email" className="email" placeholder="Your email" />
+        <input type="password" className="password" placeholder="Password" />
+      </form>
+
+
+
+
       {movies.map((movie) => (
         <div className="movies-div" key={movie.id}>
           <Link to={`/movies/${movie.id}`}>
