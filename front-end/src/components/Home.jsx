@@ -1,62 +1,10 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
-
-  // const API_URL = "http://localhost:7000/api/movies";
-  const client = axios.create({
-    baseURL: "http://localhost:7000/api/movies",
-  });
-
-  const getAllMovies = async () => {
-    const response = await client.get("");
-    if (response.status === 200) {
-      setMovies(response.data);
-    }
-  };
-
-  useEffect(() => {
-    getAllMovies();
-  });
-
-  const handleClick = (id) => {
-    const response = client.delete(`${id}`);
-    if (response.status === 200) {
-      setMovies(movies.filter((movie) => movie.id != id));
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-  }
-
   return (
-    <div>
-      <form action="submit" className="form-harsh-pwd" onSubmit={() => handleSubmit()} >
-        <input type="email" className="email" placeholder="Your email" />
-        <input type="password" className="password" placeholder="Password" />
-      </form>
-
-
-
-
-      {movies.map((movie) => (
-        <div className="movies-div" key={movie.id}>
-          <Link to={`/movies/${movie.id}`}>
-            <li>{movie.title}</li>
-          </Link>
-          <button
-            className="btn-delete"
-            type="button"
-            onClick={() => handleClick(movie.id)}
-          >
-            X
-          </button>
-        </div>
-      ))}
+    <div className="home">
+      <Link to="/movies/" >Movies</Link>
+      <Link to="/users/">Users</Link>
     </div>
   );
 }
