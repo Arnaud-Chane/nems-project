@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import {getMovies, getMovieById, postMovies, updateMovies, deleteMovie} from './src/controllers/movieHandlers.js';
 import { getUsers, getUserById, postUsers, updateUser, deleteUser } from './src/controllers/userHandlers.js';
-import { hashPassword } from "./src/middlewares/auth.js";
+// import { hashPassword } from "./src/middlewares/auth.js";
 
 dotenv.config();
 
@@ -24,10 +24,12 @@ app.get("/api/users", getUsers);
 app.get("/api/users/:id", getUserById);
 
 app.post("/api/movies", postMovies);
-app.post("/api/users", hashPassword, postUsers);
+app.post("/api/users", postUsers);
+// app.post("/api/users", hashPassword, postUsers);
 
 app.put("/api/movies/:id", updateMovies);
-app.put("/api/users/:id", hashPassword, updateUser);
+app.put("/api/users/:id", updateUser);
+// app.put("/api/users/:id", hashPassword, updateUser);
 
 app.delete("/api/movies/:id", deleteMovie);
 app.delete("/api/users/:id", deleteUser);
